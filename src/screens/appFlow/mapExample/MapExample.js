@@ -73,7 +73,7 @@ const MapExample = () => {
 
                     }}
                     query={{
-                        key: 'AIzaSyDeCOtnYSOwBTdTwYHl1h1QkuEqsg5yvHY',
+                        key: '',
                         language: 'en',
                     }}
                 />
