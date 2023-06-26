@@ -8,6 +8,7 @@ LogBox.ignoreAllLogs();
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistStore } from 'redux-persist'
 import FlashMessage from "react-native-flash-message";
+import './src/i18n'
 
 class App extends Component {
 

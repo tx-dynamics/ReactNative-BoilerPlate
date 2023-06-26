@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image, View, TouchableOpacity, Platform } from 'react-native'
+import { StyleSheet, Image, View, TouchableOpacity, Platform, I18nManager } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { DashboardStack } from '../appFlow/dashboardStack'
@@ -29,7 +29,7 @@ const TabButton = (props) => {
                     {focused &&
                         <View style={styles.dotStyle} />
                     }
-                    <Image source={item.icon} style={[styles.tabIcon, { tintColor: focused ? colors.theme : colors.grey }]} />
+                    <Image source={item.icon} style={[styles.tabIcon, { tintColor: focused ? colors.theme : colors.grey, transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }] }]} />
                 </View>
             </View>
         </TouchableOpacity>

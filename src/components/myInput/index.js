@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import { I18nManager, StyleSheet, TextInput } from 'react-native';
 
 import { colors, hp, wp } from '../../services';
 
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
         marginTop: hp(2),
         alignSelf: "center",
         borderColor: colors.theme,
+        textAlign: I18nManager.isRTL ? 'left' : 'right',
         borderWidth: 1,
         borderRadius: 50,
         paddingHorizontal: wp(2)

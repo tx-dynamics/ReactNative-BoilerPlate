@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Image, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Image, Text, View, TouchableOpacity, I18nManager } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
 import { appIcons, colors, fontFamily, hp, wp } from '../../services'
 import themeContext from '../../services/config/themeContext'
 
 const Header = props => {
     const theme = useContext(themeContext)
-    const { leftIcon, title, backgroundColor, titleStyle, onPress, shadow, color, rightIcon1, rightIconStyle, fontSize, onpressSearch, bold, searchbackgroundColor, onPressrightIcon2, rightIcon2, darkBackground } = props
+    const { leftIcon, title, titleStyle, onPress, shadow, rightIcon1, rightIconStyle, fontSize, onpressSearch, bold, searchbackgroundColor, onPressrightIcon2, rightIcon2 } = props
+    const { t } = useTranslation();
+
     return (
         <View style={{ backgroundColor: 'red' }}>
             <View style={[styles.container, shadow && styles.shadow, { backgroundColor: theme.background }]}>
@@ -14,24 +17,24 @@ const Header = props => {
                     <View style={{ flexDirection: 'row', alignItems: 'center', }}>
                         <TouchableOpacity onPress={onPress}>
                             {leftIcon &&
-                                <Image style={styles.iconStyle} source={leftIcon} />
+                                <Image style={[styles.iconStyle, { transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }] }]} source={leftIcon} />
                             }
                         </TouchableOpacity>
                         <View style={[styles.textViewStyle, { marginLeft: leftIcon ? 20 : 0 }]}>
                             <Text style={[titleStyle, styles.textStyle, { color: theme.text, fontSize: fontSize ? fontSize : 18, fontFamily: bold ? fontFamily.appTextBold : fontFamily.appTextSemiBold }]}>
-                                {title}
+                                {t(title)}
                             </Text>
                         </View>
                     </View>
                     <View style={[rightIconStyle, { flexDirection: 'row' }]}>
                         {rightIcon1 &&
                             <TouchableOpacity onPress={onpressSearch} style={[styles.rightIconView, { marginRight: hp(2), backgroundColor: theme.backgroundTwo }]} >
-                                <Image style={[styles.rightIcon, { tintColor: theme.color }]} source={appIcons.search} />
+                                <Image style={[styles.rightIcon, { tintColor: theme.color, transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }] }]} source={appIcons.search} />
                             </TouchableOpacity>
                         }
                         {rightIcon2 &&
                             <TouchableOpacity onPress={onPressrightIcon2} style={[styles.rightIconView, { backgroundColor: searchbackgroundColor ? searchbackgroundColor : theme.backgroundTwo }]} >
-                                <Image style={[styles.rightIcon, { tintColor: theme.color }]} source={rightIcon2} />
+                                <Image style={[styles.rightIcon, { tintColor: theme.color, transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }] }]} source={rightIcon2} />
                             </TouchableOpacity>
                         }
                     </View>

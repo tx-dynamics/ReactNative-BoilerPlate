@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { View, Text, StatusBar } from 'react-native'
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { routes } from '../../../services'
 import { Header, MyInput } from '../../../components';
@@ -17,6 +18,7 @@ const SignupScreen = ({ navigation }) => {
   const [name, setName] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const { t } = useTranslation();
 
   const onPressSignup = () => {
     if (isSignupValid(name, email, password, confirmPassword)) {
@@ -28,18 +30,18 @@ const SignupScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]} >
       <StatusBar backgroundColor={theme.background} barStyle={theme.theme === 'dark' ? 'light-content' : 'dark-content'} />
-      <Header title={'Signup '} />
+      <Header title={t('Signup')} />
       <View style={[styles.wrapper, { backgroundColor: theme.background }]}>
-        <Text style={{ color: theme.color, fontSize: 20 }}>Signup Screen</Text>
-        <MyInput value={name} setValue={setName} placeholder={"Enter Name!"} />
-        <MyInput value={email} setValue={setEmail} placeholder={"Enter Email!"} />
-        <MyInput value={password} setValue={setPassword} placeholder={"Enter Password!"} />
-        <MyInput value={confirmPassword} setValue={setConfirmPassword} placeholder={"Enter Confirm Password!"} />
+        <Text style={{ color: theme.color, fontSize: 20 }}>{t('Signup Screen')}</Text>
+        <MyInput value={name} setValue={setName} placeholder={t("Enter Name!")} />
+        <MyInput value={email} setValue={setEmail} placeholder={t("Enter Email!")} />
+        <MyInput value={password} setValue={setPassword} placeholder={t("Enter Password!")} />
+        <MyInput value={confirmPassword} setValue={setConfirmPassword} placeholder={t("Enter Confirm Password!")} />
         <View style={{ paddingTop: 20 }}>
-          <Button onPress={() => onPressSignup()}>Signup</Button>
+          <Button onPress={() => onPressSignup()}>{t('Signup')}</Button>
         </View>
         <View style={{ paddingTop: 20 }}>
-          <Button onPress={() => navigation.navigate(routes.login)}>Login</Button>
+          <Button onPress={() => navigation.navigate(routes.login)}>{t('Login')}</Button>
         </View>
       </View>
     </View>
