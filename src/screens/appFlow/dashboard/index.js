@@ -2,13 +2,14 @@ import React, { useContext, useState, useEffect } from 'react'
 import { View, Text, StatusBar, FlatList } from 'react-native'
 import { DrawerActions } from '@react-navigation/native';
 
-import { appIcons, colors } from '../../../services'
+import { HelpingMethods, appIcons, colors } from '../../../services'
 import { Header, Loader } from '../../../components';
 import { styles } from './styles';
 import themeContext from '../../../services/config/themeContext';
 import { GeneralFetch, callApi } from '../../../network/apiCaller';
 import messaging from '@react-native-firebase/messaging';
 import { FlashAlert } from '../../../components/FlashMessage';
+import { Method } from '../../../network/NetworkManger';
 
 
 const Dashboard = ({ navigation }) => {
@@ -59,18 +60,27 @@ const Dashboard = ({ navigation }) => {
     getData()
   }, [])
 
-  const getData = () => {
-    GeneralFetch(
-      null,
-      'GET',
-      'https://dummyapi.online/api/movies',
-      {},
-      setLoading,
-      res => {
-        setData(res)
-      },
-      error => { },
-    );
+
+
+  const getData = async () => {
+    try {
+      const endPoint = '';
+      await callApi(Method.GET, endPoint, null,
+        res => {
+          if (res?.status === 200) {
+            setData(res)
+          }
+          else {
+            console.log('Error')
+          }
+        },
+        err => {
+          console.log(err.message)
+
+        });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const renderDashboardList = () => {

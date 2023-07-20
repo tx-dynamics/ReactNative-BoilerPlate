@@ -1,4 +1,4 @@
-export const BASE_URL = ''
+export const BASE_URL = 'https://dummyapi.online/api/movies'
 export const IMAGE_BASE_URL = ''
 export const googleApiKey = ''
 
