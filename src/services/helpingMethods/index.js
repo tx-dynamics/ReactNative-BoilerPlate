@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import ImageCropPicker from 'react-native-image-crop-picker'
+import NetInfo from "@react-native-community/netinfo";
 
 export const storeDataToStorage = async (key, value) => {
     await AsyncStorage.setItem(key, JSON.stringify(value))
@@ -14,7 +15,12 @@ export const getDataFromStorage = async (value) => {
     let newData = JSON.parse(data)
     return newData
 }
-
+export default class NetworkUtils {
+    static async isNetworkAvailable() {
+        const response = await NetInfo.fetch();
+        return response.isConnected;
+    }
+}
 
 
 
